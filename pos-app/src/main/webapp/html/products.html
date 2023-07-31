@@ -1,0 +1,155 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="fragments.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="fragments.html :: name_navbar"></nav>
+
+<div class="container pb-5">
+
+    <div class="mt-5 py-4 row align-items-center">
+        <h2 class="col">Products</h2>
+        <div class="col d-flex justify-content-end">
+            <button th:if="${info.getRole() eq 'SUPERVISOR'}" type="button" class="btn btn-success d-flex justify-content-center align-items-center"
+                    id="add-data">Add
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center" id="refresh-data">
+                <span id="refresh-icon" class="spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span id="refresh-text">Refresh</span>
+            </button>
+            &nbsp;
+            <button th:if="${info.getRole() eq 'SUPERVISOR'}" type="button" class="btn btn-info d-flex justify-content-center align-items-center"
+                    id="upload-data">Upload
+            </button>
+        </div>
+    </div>
+    <div class="table-root row">
+        <!-- Table -->
+        <div class="col-12">
+            <table class="table table-striped" id="product-table">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Barcode</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">MRP</th>
+                    <th th:if="${info.getRole() eq 'SUPERVISOR'}" scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Product add modal -->
+    <div th:if="${info.getRole() eq 'SUPERVISOR'}" class="modal" tabindex="-1" role="dialog" id="product-modal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 id="product-modal-title" class="modal-title text-center flex-grow-1">Add Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body my-3">
+                    <form id="product-form" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="input-barcode" class="col-sm-2 col-form-label">Barcode</label>
+                            <input type="text" class="form-control" name="barcode" id="input-barcode"
+                                   placeholder="Enter barcode" required maxlength="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-brand" class="col-sm-2 col-form-label">Brand</label>
+                            <input type="text" class="form-control" name="brand" id="input-brand"
+                                   placeholder="Enter brand" required maxlength="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-category" class="col-sm-2 col-form-label">Category</label>
+                            <input type="text" class="form-control" name="category" id="input-category"
+                                   placeholder="Enter category" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-name" class="col-sm-2 col-form-label">Name</label>
+                            <input type="text" class="form-control" name="name" id="input-name"
+                                   placeholder="Enter name" required maxlength="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-mrp" class="col-sm-3 col-form-label">MRP</label>
+                            <input type="number" step="any" min="0.01" max="100000000" class="form-control" name="mrp" id="input-mrp" placeholder="Enter MRP (e.g., 100.00)" required>
+                            <small id="mrpHelp" class="help-text form-text text-muted pl-2">Note: MRP should be a positive number</small>
+                        </div>
+                        <input type="hidden" name="id" >
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-success btn-block" id="add-product">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Product add modal ends -->
+
+    <!-- Upload product modal -->
+    <div th:if="${info.getRole() eq 'SUPERVISOR'}" class="modal" tabindex="-1" role="dialog" id="upload-product-modal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title text-center flex-grow-1">Upload Products</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="product-file mb-3">
+                        <input type="file" class="custom-file-input" id="product-file">
+                        <label class="custom-file-label" for="product-file" id="product-file-name">Choose a file</label>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="@{/sample/products.tsv}" target="_blank" class="btn btn-primary">Download Sample</a>
+                    </div>
+                    <div class="row">
+                        <p class="text-muted small pt-2">Note:</p>
+                        <div class="col">
+                            <p class="text-muted small pt-2" style="margin-bottom: 0px">1. Supported file format is .tsv</p>
+                            <p class="text-muted small pt-2">2. Rows are limited to 5000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="process-data">
+                        <span id="process-icon" class="spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span id="process-text">Upload</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="download-errors" disabled>Download Errors</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upload product modal end -->
+
+</div>
+
+<div th:replace="fragments.html :: name_footer"></div>
+<script th:src="@{/static/js/products.js}"></script>
+
+</body>
+
+</html>

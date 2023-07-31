@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <head th:replace="fragments.html :: name_head"></head>
+    <link rel="stylesheet" th:href="@{/static/css/auth.css}">
+</head>
+<body>
+
+<main class="main">
+    <div class="container">
+        <section class="wrapper">
+            <div class="heading">
+                <h1 class="text text-large">Sign Up</h1>
+                <p class="text text-normal">Existing user? <span><a th:href="@{/site/login}" class="text text-links">Login</a></span>
+                </p>
+            </div>
+            <form id="signup-form" name="signup" class="form">
+                <div class="input-control">
+                    <label for="email" class="input-label" hidden>Email Address</label>
+                    <input type="email" name="email" id="email" class="input-field" placeholder="Email Address">
+                </div>
+                <div class="input-control">
+                    <label for="password" class="input-label" hidden>Password</label>
+                    <input type="password" name="password" id="password" class="input-field" placeholder="Password">
+                </div>
+                <div class="input-control">
+                    <label for="confirm-password" class="input-label" hidden>Confirm Password</label>
+                    <input type="password" name="password" id="confirm-password" class="input-field" placeholder="Confirm Password">
+                </div>
+                <div class="input-control">
+                    <div></div>
+                    <input id="signup-button" type="submit" name="submit" class="input-submit" value="Sign Up">
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+
+<div th:replace="fragments.html :: name_footer"></div>
+<script th:src="@{/static/js/auth.js}"></script>
+
+</body>
+
+</html>

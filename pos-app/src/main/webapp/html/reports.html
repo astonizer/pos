@@ -1,0 +1,114 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="fragments.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="fragments.html :: name_navbar"></nav>
+
+<div class="container pb-5">
+
+    <div class="bg-light mt-5 py-4 row">
+        <h2 class="col">Reports</h2>
+    </div>
+    <div class="row reports">
+        <div class="col-12 my-4">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-between" id="headingOne">
+                        <div>
+                            <h5 class="card-title">Sales Report</h5>
+                            <p class="card-text">Retrieve the sales data of products within a specified range on our platform.</p>
+                        </div>
+                        <div>
+                            <button style="width: 200px; text-align: center;" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Apply filters
+                            </button>
+                        </div>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form id="sales-report-form" class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputStartDate">Start Date *</label>
+                                        <input type="date" class="form-control mb-2 mr-sm-2" name="startDate" id="inputStartDate" placeholder="Select start date" required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputEndDate">End Date *</label>
+                                        <input type="date" class="form-control mb-2 mr-sm-2" name="endDate" id="inputEndDate" placeholder="Select end date" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputBrand">Brand</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inputBrand" placeholder="Enter brand">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputCategory">Category</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inputCategory" placeholder="Enter category">
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div></div>
+                                    <div>
+                                        <button style="width: 200px; text-align: center;" type="submit" class="btn btn-primary mb-2" id="download-sales-report">Download Report</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Daily Sales Report</h5>
+                        <p class="card-text">Access the reports showcasing the daily sales for your business.</p>
+                    </div>
+                    <div>
+                        <button style="width: 200px; text-align: center;" id="download-daily-sales-report" class="btn btn-primary">Download Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 my-4">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Inventory Report</h5>
+                        <p class="card-text">Get the inventory report displaying the quantity of each product.</p>
+                    </div>
+                    <div>
+                        <button style="width: 200px; text-align: center;" id="download-inventory-report" class="btn btn-primary">Download Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title">Brand Reports</h5>
+                        <p class="card-text">Obtain the collection of reports related to the brands registered on our platform.</p>
+                    </div>
+                    <div>
+                        <button style="width: 200px; text-align: center;" id="download-brand-report" class="btn btn-primary">Download Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments.html :: name_footer"></div>
+<script th:src="@{/static/js/reports.js}"></script>
+</body>
+
+</html>

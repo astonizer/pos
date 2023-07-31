@@ -1,0 +1,140 @@
+body {
+  font-family: 'Lato', sans-serif !important;
+  background-color: #F4F7FB;
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+.btn-prominent {
+    background-color: #FFA500;
+    color: #fff;
+}
+
+.form-control {
+    border-radius: 1rem;
+}
+
+.material-icons:hover {
+    cursor: pointer;
+}
+
+.modal-header, .modal-footer {
+    background-color: #F4F7FB;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn-container .btn {
+    margin: 0 5px;
+}
+
+.index-button {
+    cursor: pointer
+}
+
+.index-button-active {
+    color: blue;
+    text-decoration: underline;
+}
+
+#refresh-icon {
+    display: none;
+}
+
+/*
+.btn {
+    white-space: nowrap;
+}
+
+.btn-action{
+	transition: all .5s ease;
+	width: 50%;
+	border-radius: 1em !important;
+	font-weight: 600;
+	color: #8D7FD1;
+	background-color: #EBEBF6;
+}
+
+.btn-action:hover, .btn-modal-action:hover {
+    color: #8D7FD1;
+    background-color: #BFBFD3;
+}
+.btn-edit:hover {
+    color: #8D7FD1;
+    background-color: #BFBFD3;
+}
+
+.btn-main {
+	transition: all .5s ease;
+    color: #fff;
+	background-color: #8D7FD1;
+	border-radius: 1em !important;
+}
+
+.btn-main:hover, .btn-modal-main:hover {
+    color: #fff;
+    background-color: #5C4D9C;
+}
+
+.btn-modal-action {
+	transition: all .5s ease;
+    color: #8D7FD1;
+    background-color: #EBEBF6;
+}
+
+.btn-modal-main {
+	transition: all .5s ease;
+    color: #fff;
+	background-color: #8D7FD1;
+}
+
+.btn-edit {
+	border-radius: 1em;
+	color: #8D7FD1;
+	font-weight: 600;
+	background-color: #EBEBF6;
+	cursor: pointer;
+}
+*/
+
+.table-root {
+    background-color: #fff;
+    border-radius: 1.5em;
+}
+
+.odd {
+    background-color: #F4F7FB !important;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* height: 60px;  /*footer not aligned properly at the botttom */
+	line-height: 60px; /* Vertically center the text there */
+	text-align: center;
+	background-color: #fff;
+}
+
+.card-home {
+    border: none;
+    height: 200px;
+}
+
+.card-img-top {
+    max-height: 80% !important;
+}
+
+@media (max-width: 600px) {
+    .card-img-top {
+        display: none;
+    }
+}

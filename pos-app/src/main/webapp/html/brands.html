@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html lang="en">
+
+<head th:replace="fragments.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="fragments.html :: name_navbar"></nav>
+
+<div class="container pb-5">
+
+    <div class="mt-5 py-4 row align-items-center">
+        <h2 class="col">Brands</h2>
+        <div class="col d-flex justify-content-end">
+            <button th:if="${info.getRole() eq 'SUPERVISOR'}" type="button" class="btn btn-success d-flex justify-content-center align-items-center"
+                    id="add-data">Add
+            </button>
+            &nbsp;
+            <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center" id="refresh-data">
+                <span id="refresh-icon" class="spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span id="refresh-text">Refresh</span>
+            </button>
+            &nbsp;
+            <button th:if="${info.getRole() eq 'SUPERVISOR'}" type="button" class="btn btn-info d-flex justify-content-center align-items-center"
+                    id="upload-data">Upload
+            </button>
+        </div>
+    </div>
+    <div class="table-root row">
+        <!-- Table -->
+        <div class="col-12">
+            <table class="table table-striped" id="brand-table">
+                <thead>
+                <tr class="">
+                    <th scope="col"><strong>#</strong></th>
+                    <th scope="col"><strong>Brand</strong></th>
+                    <th scope="col"><strong>Category</strong></th>
+                    <th th:if="${info.getRole() eq 'SUPERVISOR'}" scope="col"><strong>Actions</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Brand modal -->
+    <div th:if="@{info.getRole() eq 'SUPERVISOR'}" class="modal" tabindex="-1" role="dialog" id="brand-modal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 id="brand-modal-title" class="modal-title text-center flex-grow-1">Add Brand</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body my-3">
+                    <form id="brand-form" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="input-brand" class="col-sm-2 col-form-label">Brand</label>
+                            <input type="text" class="form-control" name="brand" id="input-brand"
+                                   placeholder="Enter brand" maxlength="30" required>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="input-category" class="col-sm-2 col-form-label">Category</label>
+                            <input type="text" class="form-control" maxlength="30" name="category" id="input-category"
+                                   placeholder="Enter category" required>
+                        </div>
+                        <input type="hidden" name="id" >
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-6 text-left">
+                                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="button" class="btn btn-success btn-block" id="add-brand">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Brand add modal ends -->
+
+    <!-- Upload brand modal -->
+    <div th:if="@{info.getRole() eq 'SUPERVISOR'}" class="modal" tabindex="-1" role="dialog" id="upload-brand-modal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title text-center flex-grow-1">Upload Brands</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div class="brand-file mb-3">
+                        <input type="file" class="custom-file-input" id="brand-file">
+                        <label class="custom-file-label" for="brand-file" id="brand-file-name">Choose a file</label>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="@{/sample/brands.tsv}" target="_blank" class="btn btn-primary">Download Sample</a>
+                    </div>
+                    <div class="row">
+                        <p class="text-muted small pt-2">Note:</p>
+                        <div class="col">
+                            <p class="text-muted small pt-2" style="margin-bottom: 0px">1. Supported file format is .tsv</p>
+                            <p class="text-muted small pt-2">2. Rows are limited to 5000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" id="process-data">
+                        <span id="process-icon" class="spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span id="process-text">Upload</span>
+                    </button>
+                    <button type="button" class="btn btn-primary" id="download-errors" disabled>Download Errors</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upload brand modal end -->
+
+</div>
+
+<div th:replace="fragments.html :: name_footer"></div>
+<script th:src="@{/static/js/brands.js}"></script>
+
+</body>
+
+</html>

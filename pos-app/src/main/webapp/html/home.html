@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments.html :: name_head"></head>
+
+<body>
+
+<nav th:replace="fragments.html :: name_navbar"></nav>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-sm-6 col-xs-12 my-3">
+            <div class="card card-home">
+                <div class="card-body row">
+                    <div class="col-sm-3">
+                        <img th:src="@{/static/img/brand.svg}" class="card-img-top" alt="brand-image">
+                    </div>
+                    <div class="col-sm-9">
+                        <h5 class="card-title">Brands</h5>
+                        <p class="card-text">Take a glimpse into our extensive collection of registered brands.</p>
+                        <a th:href="@{/ui/brands}" class="btn btn-primary">View Brands</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12 my-3">
+            <div class="card card-home">
+                <div class="card-body row">
+                    <div class="col-sm-9" style="text-align: right">
+                        <h5 class="card-title">Products</h5>
+                        <p class="card-text">Explore our comprehensive range of registered products.</p>
+                        <a th:href="@{/ui/products}" class="btn btn-primary">View Products</a>
+                    </div>
+                    <div class="col-sm-3">
+                        <img th:src="@{/static/img/product.svg}" class="card-img-top" alt="product-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12 my-3">
+            <div class="card card-home">
+                <div class="card-body row">
+                    <div class="col-sm-3">
+                        <img th:src="@{/static/img/inventory.svg}" class="card-img-top" alt="inventory-image">
+                    </div>
+                    <div class="col-sm-9">
+                        <h5 class="card-title">Inventory</h5>
+                        <p class="card-text">Discover the inventory records for each registered product in our system.</p>
+                        <a th:href="@{/ui/inventory}" class="btn btn-primary">View Inventory</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12 my-3">
+            <div class="card card-home">
+                <div class="card-body row">
+                    <div class="col-sm-9" style="text-align: right">
+                        <h5 class="card-title">Orders</h5>
+                        <p class="card-text">Easily create, modify, and generate invoices for your orders.</p>
+                        <a th:href="@{/ui/orders}" class="btn btn-primary">View Orders</a>
+                    </div>
+                    <div class="col-sm-3">
+                        <img th:src="@{/static/img/order.svg}" class="card-img-top" alt="order-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xs-12 my-3" th:if="${info.getRole() == 'SUPERVISOR'}">
+            <div class="card card-home">
+                <div class="card-body row">
+                    <div class="col-sm-3">
+                        <img th:src="@{/static/img/report.svg}" class="card-img-top" alt="report-image">
+                    </div>
+                    <div class="col-sm-9">
+                        <h5 class="card-title">Reports</h5>
+                        <p class="card-text">Access comprehensive business reports through our platform.</p>
+                        <a th:href="@{/ui/reports}" class="btn btn-primary">View Reports</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments.html :: name_footer"></div>
+
+</body>
+
+</html>
