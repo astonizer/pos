@@ -27,5 +27,7 @@ The Point of Sales System is a user-friendly and efficient application designed 
 - Java
 - Spring Framework
 - Hibernate
+- MySQL
+- Apache FOP
 - Thymeleaf
 - Bootstrap
